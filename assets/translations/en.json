@@ -1,0 +1,84 @@
+{
+  "auth": {
+    "welcome": "Welcome to Gelir Gider",
+    "subtitle": "Track income, expenses, debts, and more with smart insights.",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign In",
+    "signUp": "Create Account",
+    "signInGoogle": "Continue with Google",
+    "checkEmail": "Please check your email for confirmation.",
+    "onboardingHint": "New here? Create an account and follow the onboarding tips."
+  },
+  "home": {
+    "title": "Dashboard",
+    "reports": "Reports",
+    "settings": "Settings",
+    "recentTransactions": "Recent Transactions",
+    "upcoming": "Upcoming",
+    "addIncome": "Add Income",
+    "addExpense": "Add Expense",
+    "noData": "No data available yet."
+  },
+  "income": {
+    "addIncome": "Add Income",
+    "category": "Income Category",
+    "Salary": "Salary",
+    "Investment": "Investment",
+    "Freelance": "Freelance",
+    "Passive": "Passive Income",
+    "Other": "Other"
+  },
+  "expense": {
+    "addExpense": "Add Expense",
+    "mainClass": "Main Class",
+    "subClass": "Sub Class",
+    "Payments": "Payments",
+    "Spending": "Spending",
+    "Bill": "Bill",
+    "CreditCard": "Credit Card",
+    "Loan": "Loan",
+    "Subscriptions": "Subscriptions",
+    "Grocery": "Grocery",
+    "Pharmacy": "Pharmacy",
+    "Vehicle": "Vehicle",
+    "Education": "Education",
+    "Health": "Health",
+    "Entertainment": "Entertainment",
+    "Vacation": "Vacation",
+    "Food": "Food",
+    "Cosmetics": "Cosmetics",
+    "Cleaning": "Cleaning",
+    "Tax": "Tax",
+    "Repair": "Repair",
+    "Service": "Service",
+    "Fuel": "Fuel"
+  },
+  "reports": {
+    "title": "Reports & Analytics",
+    "totalIncome": "Total Income",
+    "totalExpense": "Total Expense",
+    "saving": "Saving",
+    "savingRate": "Saving Rate",
+    "expenseDistribution": "Expense Distribution",
+    "netTrend": "Net Trend",
+    "smartInsights": "Smart Insights",
+    "debtIncomeWarn": "Debt/Income ratio is above 40%. Consider reducing debts.",
+    "savingLow": "Your saving rate is below 10%. Consider cutting non-essential spending.",
+    "topSpendingCat": "Top spending category: {0}"
+  },
+  "settings": {
+    "title": "Settings",
+    "themeMode": "Theme Mode",
+    "themeVariant": "Theme Variant",
+    "language": "Language",
+    "signOut": "Sign Out"
+  },
+  "common": {
+    "amount": "Amount",
+    "description": "Description",
+    "pickDate": "Pick Date",
+    "save": "Save",
+    "voiceInput": "Voice Input"
+  }
+}

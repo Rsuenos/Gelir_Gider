@@ -1,0 +1,84 @@
+{
+  "auth": {
+    "welcome": "Gelir Gider'e Hoş Geldiniz",
+    "subtitle": "Gelir, gider, borç ve daha fazlasını akıllı içgörülerle takip edin.",
+    "email": "E-posta",
+    "password": "Şifre",
+    "signIn": "Giriş Yap",
+    "signUp": "Hesap Oluştur",
+    "signInGoogle": "Google ile Devam Et",
+    "checkEmail": "Lütfen e-postanızı doğrulama için kontrol edin.",
+    "onboardingHint": "Yeni misiniz? Hesap oluşturun ve onboarding ipuçlarını takip edin."
+  },
+  "home": {
+    "title": "Panel",
+    "reports": "Raporlar",
+    "settings": "Ayarlar",
+    "recentTransactions": "Son İşlemler",
+    "upcoming": "Yaklaşan",
+    "addIncome": "Gelir Ekle",
+    "addExpense": "Gider Ekle",
+    "noData": "Henüz veri yok."
+  },
+  "income": {
+    "addIncome": "Gelir Ekle",
+    "category": "Gelir Kategorisi",
+    "Salary": "Maaş",
+    "Investment": "Yatırım",
+    "Freelance": "Serbest Kazanç",
+    "Passive": "Pasif Gelir",
+    "Other": "Diğer"
+  },
+  "expense": {
+    "addExpense": "Gider Ekle",
+    "mainClass": "Ana Sınıf",
+    "subClass": "Alt Sınıf",
+    "Payments": "Ödemeler",
+    "Spending": "Harcamalar",
+    "Bill": "Fatura",
+    "CreditCard": "Kredi Kartı",
+    "Loan": "Kredi",
+    "Subscriptions": "Abonelikler",
+    "Grocery": "Market",
+    "Pharmacy": "Eczane",
+    "Vehicle": "Taşıt",
+    "Education": "Eğitim",
+    "Health": "Sağlık",
+    "Entertainment": "Eğlence",
+    "Vacation": "Tatil",
+    "Food": "Gıda",
+    "Cosmetics": "Kozmetik",
+    "Cleaning": "Temizlik",
+    "Tax": "Vergi",
+    "Repair": "Tamir",
+    "Service": "Bakım",
+    "Fuel": "Yakıt"
+  },
+  "reports": {
+    "title": "Raporlar ve Analitik",
+    "totalIncome": "Toplam Gelir",
+    "totalExpense": "Toplam Gider",
+    "saving": "Tasarruf",
+    "savingRate": "Tasarruf Oranı",
+    "expenseDistribution": "Gider Dağılımı",
+    "netTrend": "Net Trend",
+    "smartInsights": "Akıllı Öneriler",
+    "debtIncomeWarn": "Borç/Gelir oranı %40'ın üzerinde. Borçları azaltmayı düşünün.",
+    "savingLow": "Tasarruf oranınız %10'un altında. Zorunlu olmayan harcamaları azaltmayı değerlendirin.",
+    "topSpendingCat": "En çok harcama kategorisi: {0}"
+  },
+  "settings": {
+    "title": "Ayarlar",
+    "themeMode": "Tema Modu",
+    "themeVariant": "Tema Varyantı",
+    "language": "Dil",
+    "signOut": "Çıkış Yap"
+  },
+  "common": {
+    "amount": "Tutar",
+    "description": "Açıklama",
+    "pickDate": "Tarih Seç",
+    "save": "Kaydet",
+    "voiceInput": "Sesli Giriş"
+  }
+}

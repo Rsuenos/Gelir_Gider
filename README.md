@@ -17,14 +17,11 @@ Global kullanıcılar için modern finans takip uygulaması:
 - SUPABASE_REDIRECT_URL
 
 Örnek:
-```
 flutter run --dart-define=SUPABASE_URL=https://xxx.supabase.co --dart-define=SUPABASE_ANON_KEY=anon-key --dart-define=SUPABASE_REDIRECT_URL=com.example.app://login-callback
-```
+
 
 2) Paketleri kur:
-```
 flutter pub get
-```
 
 3) Lokalizasyon:
 - assets/translations/en.json

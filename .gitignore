@@ -1,0 +1,26 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+build/
+
+# IDEs
+.vscode/
+.idea/
+
+# Flutter specific
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# Platform builds
+android/
+ios/
+macos/
+web/
+linux/
+windows/
+
+# Others
+**/*.iml
+*.log
