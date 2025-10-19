@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider/core/constants.dart';
 import 'package:gelir_gider/core/services/supabase_service.dart';
@@ -48,7 +49,7 @@ class _SignInScreenState extends State<SignInScreen> {
       await SupabaseService.auth.signUp(
         email: _email.text.trim(),
         password: _password.text.trim(),
-        emailRedirectTo: kSupabaseRedirectUrl,
+        emailRedirectTo: kIsWeb ? null : kSupabaseRedirectUrl,
       );
     } on AuthException catch (e) {
       setState(() => _error = e.message);
@@ -63,7 +64,7 @@ class _SignInScreenState extends State<SignInScreen> {
     try {
       await SupabaseService.auth.signInWithOAuth(
         OAuthProvider.google,
-        redirectTo: kSupabaseRedirectUrl,
+        redirectTo: kIsWeb ? null : kSupabaseRedirectUrl,
       );
     } on AuthException catch (e) {
       setState(() => _error = e.message);
