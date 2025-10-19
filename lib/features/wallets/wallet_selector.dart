@@ -12,7 +12,24 @@ class WalletSelector extends StatefulWidget {
 }
 
 class _WalletSelectorState extends State<WalletSelector> {
-  final _controller = TextEditingController(text: 'default-wallet');
+  late final TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController(text: 'default-wallet');
+
+    // Ensure parent widgets receive an initial value without extra user input.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      widget.onChanged(_controller.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
