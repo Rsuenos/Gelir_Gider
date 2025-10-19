@@ -30,6 +30,7 @@ create table if not exists transactions (
   subcategory text,
   amount numeric not null,
   currency text not null default 'USD',
+  credit_card_id uuid references credit_cards(id) on delete set null,
   occurred_at timestamp with time zone not null,
   description text,
   is_upcoming boolean not null default false,
@@ -46,6 +47,19 @@ create table if not exists credit_cards (
   last4 text,
   statement_day int,
   due_day int,
+  total_limit numeric,
+  current_balance numeric not null default 0,
+  created_at timestamp with time zone default now(),
+  updated_at timestamp with time zone default now()
+);
+
+create table if not exists credit_card_installments (
+  id uuid primary key default gen_random_uuid(),
+  card_id uuid not null references credit_cards(id) on delete cascade,
+  title text not null,
+  amount numeric not null,
+  due_date date,
+  status text not null default 'upcoming',
   created_at timestamp with time zone default now(),
   updated_at timestamp with time zone default now()
 );
@@ -54,6 +68,8 @@ create table if not exists debts (
   id uuid primary key default gen_random_uuid(),
   owner_id uuid not null references auth.users(id) on delete cascade,
   title text not null,
+  kind text not null default 'debt' check (kind in ('credit','debt')),
+  credit_card_id uuid references credit_cards(id) on delete set null,
   total_amount numeric not null,
   remaining_amount numeric not null,
   monthly_payment numeric,

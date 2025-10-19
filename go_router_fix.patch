@@ -1,0 +1,14 @@
+--- a/lib/core/widgets/app_drawer.dart
++++ b/lib/core/widgets/app_drawer.dart
+@@ -9,12 +9,12 @@
+   @override
+   Widget build(BuildContext context) {
+-    final location = GoRouter.of(context).location;
++    final location = GoRouterState.of(context).uri.toString();
+
+     void _goIfNeeded(String route) {
+-      if (GoRouter.of(context).location != route) {
++      if (location != route) {
+         context.go(route);
+       }
+     }

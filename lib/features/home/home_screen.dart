@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider/core/services/local_db.dart';
+import 'package:gelir_gider/core/widgets/app_drawer.dart';
+import 'package:gelir_gider/features/debt/data/debt_repository.dart';
 import 'package:gelir_gider/features/transactions/data/transaction_repository.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,13 +20,18 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Map<String, dynamic>> _lastTx = [];
   List<Map<String, dynamic>> _upcoming = [];
   bool _loading = true;
+  double _creditOutstanding = 0;
+  double _debtOutstanding = 0;
 
   Future<void> _load() async {
     final last3 = await LocalDb.getLastNTransactions(3);
     final next2 = await LocalDb.getUpcomingN(2);
+    final totals = await DebtRepository.totalRemainingByKind();
     setState(() {
       _lastTx = last3;
       _upcoming = next2;
+      _creditOutstanding = totals['credit'] ?? 0;
+      _debtOutstanding = totals['debt'] ?? 0;
       _loading = false;
     });
   }
@@ -56,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      drawer: const AppDrawer(),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
@@ -74,6 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   _Section(
                     title: t('home.upcoming'),
                     child: _TxList(items: _upcoming),
+                  ),
+                  const SizedBox(height: 16),
+                  _Section(
+                    title: t('home.liabilitiesOverview'),
+                    child: _LiabilitySummary(
+                      creditOutstanding: _creditOutstanding,
+                      debtOutstanding: _debtOutstanding,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -165,6 +181,40 @@ class _TxList extends StatelessWidget {
           ),
         );
       }).toList(),
+    );
+  }
+}
+
+class _LiabilitySummary extends StatelessWidget {
+  const _LiabilitySummary({
+    required this.creditOutstanding,
+    required this.debtOutstanding,
+  });
+
+  final double creditOutstanding;
+  final double debtOutstanding;
+
+  String _format(double value) {
+    final formatter = NumberFormat.currency(symbol: '', decimalDigits: 2);
+    return formatter.format(value).trim();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.credit_card),
+          title: Text(tr('home.totalCreditOutstanding')),
+          trailing: Text(_format(creditOutstanding)),
+        ),
+        const Divider(height: 0),
+        ListTile(
+          leading: const Icon(Icons.receipt_long),
+          title: Text(tr('home.totalDebtOutstanding')),
+          trailing: Text(_format(debtOutstanding)),
+        ),
+      ],
     );
   }
 }
