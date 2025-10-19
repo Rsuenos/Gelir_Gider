@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider/core/services/local_db.dart';
+import 'package:gelir_gider/core/widgets/app_drawer.dart';
 
 /// Reports with charts, KPI dashboard, and simple insights.
 class ReportsScreen extends StatefulWidget {
@@ -38,7 +39,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
     const t = tr;
 
     if (_loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        appBar: AppBar(title: Text(t('reports.title'))),
+        drawer: const AppDrawer(),
+        body: const Center(child: CircularProgressIndicator()),
+      );
     }
 
     final income = _tx.where((e) => e['type'] == 'income').toList();
@@ -96,6 +101,7 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(t('reports.title'))),
+      drawer: const AppDrawer(),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [

@@ -20,6 +20,14 @@
     "addExpense": "Gider Ekle",
     "noData": "Henüz veri yok."
   },
+  "navigation": {
+    "home": "Ana Sayfa",
+    "addIncome": "Gelir Ekle",
+    "addExpense": "Gider Ekle",
+    "reports": "Raporlar",
+    "settings": "Ayarlar",
+    "signOut": "Çıkış Yap"
+  },
   "income": {
     "addIncome": "Gelir Ekle",
     "category": "Gelir Kategorisi",

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider/core/services/local_db.dart';
+import 'package:gelir_gider/core/widgets/app_drawer.dart';
 import 'package:gelir_gider/features/transactions/data/transaction_repository.dart';
 import 'package:go_router/go_router.dart';
 
@@ -56,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      drawer: const AppDrawer(),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : RefreshIndicator(
