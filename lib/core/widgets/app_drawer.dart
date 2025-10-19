@@ -67,6 +67,40 @@ class AppDrawer extends ConsumerWidget {
               selected: _norm(current).startsWith('/add-expense'),
               onTap: () => navigate('/add-expense'),
             ),
+            ExpansionTile(
+              leading: const Icon(Icons.account_balance_wallet_outlined),
+              title: Text(t('navigation.bank')),
+              initiallyExpanded: _norm(current).startsWith('/credit-cards') ||
+                  _norm(current).startsWith('/add-credit') ||
+                  _norm(current).startsWith('/add-credit-card'),
+              childrenPadding: EdgeInsets.zero,
+              children: [
+                _DrawerTile(
+                  icon: Icons.view_list_outlined,
+                  label: t('navigation.creditCards'),
+                  selected: _norm(current).startsWith('/credit-cards'),
+                  onTap: () => navigate('/credit-cards'),
+                ),
+                _DrawerTile(
+                  icon: Icons.credit_card,
+                  label: t('navigation.addCreditCard'),
+                  selected: _norm(current).startsWith('/add-credit-card'),
+                  onTap: () => navigate('/add-credit-card'),
+                ),
+                _DrawerTile(
+                  icon: Icons.account_balance,
+                  label: t('navigation.addCredit'),
+                  selected: _norm(current).startsWith('/add-credit'),
+                  onTap: () => navigate('/add-credit'),
+                ),
+              ],
+            ),
+            _DrawerTile(
+              icon: Icons.receipt_long,
+              label: t('navigation.addDebt'),
+              selected: _norm(current).startsWith('/add-debt'),
+              onTap: () => navigate('/add-debt'),
+            ),
             _DrawerTile(
               icon: Icons.pie_chart_outline,
               label: t('navigation.reports'),

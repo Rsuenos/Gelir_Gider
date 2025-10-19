@@ -18,6 +18,11 @@ class SessionNotifier extends ChangeNotifier {
       notifyListeners();
     });
   }
+
+  SessionNotifier.test({bool isAuthenticated = false})
+      : _isAuthenticated = isAuthenticated {
+    _subscription = const Stream<AuthState>.empty().listen((_) {});
+  }
   bool _isAuthenticated = false;
   late final StreamSubscription<AuthState> _subscription;
 

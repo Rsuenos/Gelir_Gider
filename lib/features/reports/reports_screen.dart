@@ -6,6 +6,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:gelir_gider/core/services/local_db.dart';
 import 'package:gelir_gider/core/widgets/app_drawer.dart';
+import 'package:gelir_gider/features/debt/data/debt_repository.dart';
 
 /// Reports with charts, KPI dashboard, and simple insights.
 class ReportsScreen extends StatefulWidget {
@@ -18,6 +19,8 @@ class ReportsScreen extends StatefulWidget {
 class _ReportsScreenState extends State<ReportsScreen> {
   bool _loading = true;
   List<Map<String, dynamic>> _tx = [];
+  double _creditOutstanding = 0;
+  double _debtOutstanding = 0;
 
   @override
   void initState() {
@@ -28,8 +31,11 @@ class _ReportsScreenState extends State<ReportsScreen> {
   Future<void> _load() async {
     // In a real app, query by date range and categories.
     final last100 = await LocalDb.getLastNTransactions(100);
+    final totals = await DebtRepository.totalRemainingByKind();
     setState(() {
       _tx = last100;
+      _creditOutstanding = totals['credit'] ?? 0;
+      _debtOutstanding = totals['debt'] ?? 0;
       _loading = false;
     });
   }
@@ -89,6 +95,22 @@ class _ReportsScreenState extends State<ReportsScreen> {
 
     // Basic insights
     final insights = <String>[];
+    if (_creditOutstanding > 0) {
+      insights.add(
+        t(
+          'reports.creditOutstandingInfo',
+          args: [_creditOutstanding.toStringAsFixed(2)],
+        ),
+      );
+    }
+    if (_debtOutstanding > 0) {
+      insights.add(
+        t(
+          'reports.debtOutstandingInfo',
+          args: [_debtOutstanding.toStringAsFixed(2)],
+        ),
+      );
+    }
     if (totalIncome > 0 && totalExpense / totalIncome > 0.4) {
       insights.add(t('reports.debtIncomeWarn'));
     }
@@ -116,6 +138,14 @@ class _ReportsScreenState extends State<ReportsScreen> {
               _KpiCard(
                 label: t('reports.savingRate'),
                 valueText: '${(savingRate * 100).toStringAsFixed(1)}%',
+              ),
+              _KpiCard(
+                label: t('reports.totalCreditOutstanding'),
+                value: _creditOutstanding,
+              ),
+              _KpiCard(
+                label: t('reports.totalDebtOutstanding'),
+                value: _debtOutstanding,
               ),
             ],
           ),

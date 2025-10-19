@@ -46,6 +46,7 @@ class LocalDb {
             subcategory TEXT,
             amount REAL NOT NULL,
             currency TEXT NOT NULL DEFAULT 'USD',
+            credit_card_id TEXT,
             occurred_at INTEGER NOT NULL,
             description TEXT,
             is_upcoming INTEGER NOT NULL DEFAULT 0,
