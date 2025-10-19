@@ -7,15 +7,24 @@ import 'package:go_router/go_router.dart';
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
 
+  // Rota karşılaştırmalarında küçük normalize yardımı
+  String _norm(String s) => s.startsWith('/') ? s : '/$s';
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final location = GoRouter.of(context).location;
+    // Anlık konumu her build’te çek
+    final current = GoRouterState.of(context).uri.toString();
     final session = ref.read(sessionProvider);
     const t = tr;
 
     void navigate(String route) {
+      // Drawer’ı kapat
       Navigator.of(context).pop();
-      if (GoRouter.of(context).location != route) {
+
+      // Konumu *fonksiyon içinde* tekrar al (güncel değer)
+      final now = GoRouterState.of(context).uri.toString();
+
+      if (_norm(now) != _norm(route)) {
         context.go(route);
       }
     }
@@ -43,31 +52,31 @@ class AppDrawer extends ConsumerWidget {
             _DrawerTile(
               icon: Icons.dashboard_outlined,
               label: t('navigation.home'),
-              selected: location == '/',
+              selected: _norm(current) == '/',
               onTap: () => navigate('/'),
             ),
             _DrawerTile(
               icon: Icons.trending_up,
               label: t('navigation.addIncome'),
-              selected: location.startsWith('/add-income'),
+              selected: _norm(current).startsWith('/add-income'),
               onTap: () => navigate('/add-income'),
             ),
             _DrawerTile(
               icon: Icons.trending_down,
               label: t('navigation.addExpense'),
-              selected: location.startsWith('/add-expense'),
+              selected: _norm(current).startsWith('/add-expense'),
               onTap: () => navigate('/add-expense'),
             ),
             _DrawerTile(
               icon: Icons.pie_chart_outline,
               label: t('navigation.reports'),
-              selected: location.startsWith('/reports'),
+              selected: _norm(current).startsWith('/reports'),
               onTap: () => navigate('/reports'),
             ),
             _DrawerTile(
               icon: Icons.settings_outlined,
               label: t('navigation.settings'),
-              selected: location.startsWith('/settings'),
+              selected: _norm(current).startsWith('/settings'),
               onTap: () => navigate('/settings'),
             ),
             const Divider(),
