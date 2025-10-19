@@ -10,8 +10,8 @@ class SettingsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const t = tr;
-    final theme = ref.watch(themeProvider);
-    final themeCtrl = ref.read(themeProvider.notifier);
+    final theme = ref.watch<ThemeState>(themeProvider);
+    final themeCtrl = ref.read<ThemeController>(themeProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(title: Text(t('settings.title'))),

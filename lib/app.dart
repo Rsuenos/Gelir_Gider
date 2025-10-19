@@ -10,7 +10,7 @@ class FinanceXApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeState = ref.watch(themeProvider);
+    final themeState = ref.watch<ThemeState>(themeProvider);
 
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

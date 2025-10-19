@@ -33,20 +33,20 @@ class ThemeState {
   }
 }
 
-final themeProvider = StateNotifierProvider<ThemeController, ThemeState>((ref) {
-  const initialType = AppThemeType.oneUI;
-  return ThemeController(
-    ThemeState(
+final NotifierProvider<ThemeController, ThemeState> themeProvider =
+    NotifierProvider<ThemeController, ThemeState>(ThemeController.new);
+
+class ThemeController extends Notifier<ThemeState> {
+  @override
+  ThemeState build() {
+    const initialType = AppThemeType.oneUI;
+    return ThemeState(
       mode: ThemeMode.system,
       type: initialType,
       lightTheme: _buildTheme(initialType, Brightness.light),
       darkTheme: _buildTheme(initialType, Brightness.dark),
-    ),
-  );
-});
-
-class ThemeController extends StateNotifier<ThemeState> {
-  ThemeController(super._state);
+    );
+  }
 
   void setMode(ThemeMode mode) => state = state.copyWith(mode: mode);
 

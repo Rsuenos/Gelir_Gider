@@ -34,6 +34,8 @@ class SessionNotifier extends ChangeNotifier {
   }
 }
 
-final sessionProvider = ChangeNotifierProvider<SessionNotifier>((ref) {
-  return SessionNotifier();
+final sessionProvider = Provider<SessionNotifier>((ref) {
+  final notifier = SessionNotifier();
+  ref.onDispose(notifier.dispose);
+  return notifier;
 });
