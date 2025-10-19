@@ -6,10 +6,23 @@ class SupabaseService {
   static Future<void> init({
     required String supabaseUrl,
     required String anonKey,
+    String? redirectUrl,
   }) async {
+    FlutterAuthClientOptions? authOptions;
+    if (redirectUrl != null && redirectUrl.isNotEmpty) {
+      final callbackHost = Uri.tryParse(redirectUrl)?.host;
+      authOptions = FlutterAuthClientOptions(
+        redirectUrl: redirectUrl,
+        authCallbackUrlHostname: callbackHost != null && callbackHost.isNotEmpty
+            ? callbackHost
+            : null,
+      );
+    }
+
     await Supabase.initialize(
       url: supabaseUrl,
       anonKey: anonKey,
+      authOptions: authOptions,
     );
   }
 
