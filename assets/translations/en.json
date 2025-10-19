@@ -20,6 +20,14 @@
     "addExpense": "Add Expense",
     "noData": "No data available yet."
   },
+  "navigation": {
+    "home": "Home",
+    "addIncome": "Add Income",
+    "addExpense": "Add Expense",
+    "reports": "Reports",
+    "settings": "Settings",
+    "signOut": "Sign Out"
+  },
   "income": {
     "addIncome": "Add Income",
     "category": "Income Category",

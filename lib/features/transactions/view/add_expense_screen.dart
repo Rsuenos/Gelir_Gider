@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:gelir_gider/core/widgets/app_drawer.dart';
 import 'package:gelir_gider/features/transactions/data/transaction_repository.dart';
 import 'package:gelir_gider/features/transactions/view/voice_input_button.dart';
 import 'package:gelir_gider/features/wallets/wallet_selector.dart';
@@ -72,6 +73,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(t('expense.addExpense'))),
+      drawer: const AppDrawer(),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
