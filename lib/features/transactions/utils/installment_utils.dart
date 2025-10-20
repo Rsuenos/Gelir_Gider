@@ -1,5 +1,5 @@
-class _InstallmentSlice {
-  const _InstallmentSlice({
+class InstallmentSlice {
+  const InstallmentSlice({
     required this.index,
     required this.amount,
   });
@@ -10,9 +10,9 @@ class _InstallmentSlice {
 
 class InstallmentUtils {
   /// Tutarı eşit taksitlere böler ve kuruş farkını son taksite ekler
-  static List<_InstallmentSlice> splitAmount(num total, int n) {
+  static List<InstallmentSlice> splitAmount(num total, int n) {
     if (n <= 0) throw ArgumentError('Taksit sayısı pozitif olmalı');
-    if (n == 1) return [_InstallmentSlice(index: 1, amount: total.toDouble())];
+    if (n == 1) return [InstallmentSlice(index: 1, amount: total.toDouble())];
 
     final cents = (total * 100).round();
     final base = cents ~/ n;
@@ -21,7 +21,7 @@ class InstallmentUtils {
 
     return List.generate(
         n,
-        (i) => _InstallmentSlice(
+        (i) => InstallmentSlice(
               index: i + 1,
               amount: parts[i] / 100.0,
             ));

@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:gelir_gider/core/services/supabase_service.dart';
+import 'package:gelir_gider/features/transactions/models/credit_card_transaction.dart';
 
 /// Repository responsible for CRUD operations on credit cards.
 class CreditCardRepository {
   static const _table = 'credit_cards';
   static const _installmentsTable = 'credit_card_installments';
+  static const _transactionsTable = 'credit_card_transactions';
 
   static Future<void> addCard({
     required String cardName,
@@ -65,10 +67,10 @@ class CreditCardRepository {
           .limit(5) as List<dynamic>;
 
       final rawTransactions = await SupabaseService.client
-          .from('transactions')
+          .from(_transactionsTable)
           .select()
-          .eq('credit_card_id', cardId)
-          .order('occurred_at', ascending: false)
+          .eq('card_id', cardId)
+          .order('due_date', ascending: false)
           .limit(5) as List<dynamic>;
 
       return {
@@ -78,6 +80,66 @@ class CreditCardRepository {
       };
     } on Object {
       return null;
+    }
+  }
+
+  /// Fetch all credit cards for the current user
+  static Future<List<Map<String, dynamic>>> fetchAllCards() async {
+    return fetchCards();
+  }
+
+  /// Insert credit card transactions
+  static Future<void> insertTransactions(
+      List<CreditCardTransaction> txs) async {
+    if (txs.isEmpty) return;
+
+    final payload = txs.map((tx) => tx.toJson()).toList();
+    await SupabaseService.client.from(_transactionsTable).insert(payload);
+  }
+
+  /// Watch transactions for a specific card (real-time if available, or fetch)
+  static Stream<List<CreditCardTransaction>> watchTransactions(String cardId) {
+    // For now, return a periodic fetch. Real-time can be added later.
+    return Stream.periodic(
+            const Duration(seconds: 30), (_) => _fetchTransactions(cardId))
+        .asyncMap((future) => future);
+  }
+
+  /// Fetch transactions for a specific card
+  static Future<List<CreditCardTransaction>> _fetchTransactions(
+      String cardId) async {
+    try {
+      final data = await SupabaseService.client
+          .from(_transactionsTable)
+          .select()
+          .eq('card_id', cardId)
+          .order('due_date', ascending: false);
+
+      return (data as List<dynamic>)
+          .cast<Map<String, dynamic>>()
+          .map(CreditCardTransaction.fromJson)
+          .toList();
+    } on Object {
+      return [];
+    }
+  }
+
+  /// Fetch upcoming transactions (not posted and due date > today)
+  static Future<List<CreditCardTransaction>> fetchUpcomingTransactions(
+      String cardId) async {
+    try {
+      final data = await SupabaseService.client
+          .from('credit_card_upcoming') // view we created
+          .select()
+          .eq('card_id', cardId)
+          .order('due_date');
+
+      return (data as List<dynamic>)
+          .cast<Map<String, dynamic>>()
+          .map(CreditCardTransaction.fromJson)
+          .toList();
+    } on Object {
+      return [];
     }
   }
 }
