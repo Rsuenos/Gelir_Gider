@@ -90,7 +90,7 @@ class CreditCardRepository {
 
   /// Insert credit card transactions
   static Future<void> insertTransactions(
-      List<CreditCardTransaction> txs) async {
+      List<CreditCardTransaction> txs,) async {
     if (txs.isEmpty) return;
 
     final payload = txs.map((tx) => tx.toJson()).toList();
@@ -101,13 +101,13 @@ class CreditCardRepository {
   static Stream<List<CreditCardTransaction>> watchTransactions(String cardId) {
     // For now, return a periodic fetch. Real-time can be added later.
     return Stream.periodic(
-            const Duration(seconds: 30), (_) => _fetchTransactions(cardId))
+            const Duration(seconds: 30), (_) => _fetchTransactions(cardId),)
         .asyncMap((future) => future);
   }
 
   /// Fetch transactions for a specific card
   static Future<List<CreditCardTransaction>> _fetchTransactions(
-      String cardId) async {
+      String cardId,) async {
     try {
       final data = await SupabaseService.client
           .from(_transactionsTable)
@@ -126,7 +126,7 @@ class CreditCardRepository {
 
   /// Fetch upcoming transactions (not posted and due date > today)
   static Future<List<CreditCardTransaction>> fetchUpcomingTransactions(
-      String cardId) async {
+      String cardId,) async {
     try {
       final data = await SupabaseService.client
           .from('credit_card_upcoming') // view we created

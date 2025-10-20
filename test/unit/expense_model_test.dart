@@ -11,9 +11,8 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Grocery',
-        amount: 150.0,
+        amount: 150,
         occurredAt: DateTime(2024, 1, 15),
-        paymentType: PaymentType.cash,
         createdAt: DateTime(2024, 1, 15),
         updatedAt: DateTime(2024, 1, 15),
       );
@@ -35,7 +34,7 @@ void main() {
         type: 'expense',
         category: 'Payments',
         subcategory: 'CreditCard',
-        amount: 300.0,
+        amount: 300,
         occurredAt: DateTime(2024, 1, 15),
         paymentType: PaymentType.creditCard,
         creditCardId: 'card-123',
@@ -61,7 +60,7 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Electronics',
-        amount: 1200.0,
+        amount: 1200,
         occurredAt: DateTime(2024, 1, 15),
         paymentType: PaymentType.creditCard,
         creditCardId: 'card-456',
@@ -88,7 +87,7 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Grocery',
-        amount: 250.0,
+        amount: 250,
         occurredAt: DateTime(2024, 1, 15),
         description: 'Market alışverişi',
         paymentType: PaymentType.creditCard,
@@ -124,9 +123,8 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Food',
-        amount: 75.0,
+        amount: 75,
         occurredAt: DateTime(2024, 1, 15),
-        paymentType: PaymentType.cash,
         createdAt: DateTime(2024, 1, 15),
         updatedAt: DateTime(2024, 1, 15),
       );
@@ -151,9 +149,8 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Grocery',
-        amount: 100.0,
+        amount: 100,
         occurredAt: DateTime(2024, 1, 15),
-        paymentType: PaymentType.cash,
         createdAt: DateTime(2024, 1, 15),
         updatedAt: DateTime(2024, 1, 15),
       );
@@ -184,7 +181,7 @@ void main() {
             PaymentType.cash,
             PaymentType.transfer,
             PaymentType.creditCard,
-          ]));
+          ]),);
 
       // Assert - CreditCardFlow values
       expect(CreditCardFlow.values.length, 2);
@@ -193,7 +190,7 @@ void main() {
           containsAll([
             CreditCardFlow.spend,
             CreditCardFlow.payment,
-          ]));
+          ]),);
 
       // Assert - CardPaymentMode values
       expect(CardPaymentMode.values.length, 2);
@@ -202,7 +199,7 @@ void main() {
           containsAll([
             CardPaymentMode.single,
             CardPaymentMode.installment,
-          ]));
+          ]),);
     });
   });
 }

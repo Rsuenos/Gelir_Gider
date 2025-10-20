@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gelir_gider/features/transactions/models/expense.dart';
-import 'package:gelir_gider/features/transactions/services/expense_service.dart';
 
 void main() {
   group('ExpenseService Tests', () {
@@ -12,7 +11,7 @@ void main() {
         type: 'expense',
         category: 'Payments',
         subcategory: 'CreditCard',
-        amount: 100.0,
+        amount: 100,
         occurredAt: DateTime.now(),
         paymentType: PaymentType.creditCard,
         creditCardId: 'card-123',
@@ -38,7 +37,7 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Grocery',
-        amount: 600.0,
+        amount: 600,
         occurredAt: DateTime.now(),
         paymentType: PaymentType.creditCard,
         creditCardId: 'card-123',
@@ -64,9 +63,8 @@ void main() {
         type: 'expense',
         category: 'Spending',
         subcategory: 'Grocery',
-        amount: 50.0,
+        amount: 50,
         occurredAt: DateTime.now(),
-        paymentType: PaymentType.cash,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       );
@@ -87,7 +85,7 @@ void main() {
         type: 'expense',
         category: 'Payments',
         subcategory: 'CreditCard',
-        amount: 250.0,
+        amount: 250,
         occurredAt: DateTime(2024, 1, 15),
         paymentType: PaymentType.creditCard,
         creditCardId: 'card-123',

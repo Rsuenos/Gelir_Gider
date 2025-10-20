@@ -95,14 +95,12 @@ class ExpenseService {
         flow: expense.creditCardFlow!.name,
         amount: expense.amount,
         description: expense.description,
-        installmentTotal: null,
-        installmentNo: null,
         isPosted: true,
         dueDate: DateTime(expense.occurredAt.year, expense.occurredAt.month,
-            expense.occurredAt.day),
+            expense.occurredAt.day,),
         postedAt: now,
         createdAt: now,
-      ));
+      ),);
     } else {
       // Installment payment: N transactions
       final installmentCount = expense.installmentCount!;
@@ -128,7 +126,7 @@ class ExpenseService {
           dueDate: DateTime(dueDate.year, dueDate.month, dueDate.day),
           postedAt: isCurrentMonth ? now : null,
           createdAt: now,
-        ));
+        ),);
       }
     }
 

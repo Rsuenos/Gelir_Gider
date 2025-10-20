@@ -24,7 +24,7 @@ class InstallmentUtils {
         (i) => InstallmentSlice(
               index: i + 1,
               amount: parts[i] / 100.0,
-            ));
+            ),);
   }
 
   /// Ay ilerletme işlemini güvenli şekilde yapar (28/29/30/31 gün durumları)

@@ -251,7 +251,7 @@ class _CreditCardDetailPageState extends ConsumerState<CreditCardDetailPage>
                       Icon(Icons.event_available, size: 64, color: Colors.grey),
                       SizedBox(height: 16),
                       Text('Gelecek işlem bulunmuyor',
-                          style: TextStyle(color: Colors.grey)),
+                          style: TextStyle(color: Colors.grey),),
                     ],
                   ),
                 ),
@@ -286,7 +286,7 @@ class _CreditCardDetailPageState extends ConsumerState<CreditCardDetailPage>
                       Text(_formatDate(context, transaction.dueDate)),
                       if (transaction.installmentNo != null)
                         Text(
-                            '${transaction.installmentNo}/${transaction.installmentTotal} Taksit'),
+                            '${transaction.installmentNo}/${transaction.installmentTotal} Taksit',),
                     ],
                   ),
                   trailing: Text(
@@ -320,7 +320,7 @@ class _CreditCardDetailPageState extends ConsumerState<CreditCardDetailPage>
                     ElevatedButton(
                       onPressed: () {
                         ref.refresh(
-                            upcomingTransactionsProvider(widget.cardId));
+                            upcomingTransactionsProvider(widget.cardId),);
                       },
                       child: const Text('Tekrar Dene'),
                     ),

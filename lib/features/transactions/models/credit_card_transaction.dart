@@ -15,6 +15,26 @@ class CreditCardTransaction {
     this.postedAt,
   });
 
+  factory CreditCardTransaction.fromJson(Map<String, dynamic> json) {
+    return CreditCardTransaction(
+      id: json['id'] as String,
+      ownerId: json['owner_id'] as String,
+      cardId: json['card_id'] as String,
+      expenseId: json['expense_id'] as String?,
+      flow: json['flow'] as String,
+      amount: (json['amount'] as num).toDouble(),
+      description: json['description'] as String?,
+      installmentTotal: json['installment_total'] as int?,
+      installmentNo: json['installment_no'] as int?,
+      isPosted: json['is_posted'] as bool,
+      dueDate: DateTime.parse(json['due_date'] as String),
+      postedAt: json['posted_at'] != null
+          ? DateTime.parse(json['posted_at'] as String)
+          : null,
+      createdAt: DateTime.parse(json['created_at'] as String),
+    );
+  }
+
   final String id;
   final String ownerId;
   final String cardId;
@@ -77,26 +97,6 @@ class CreditCardTransaction {
       'posted_at': postedAt?.toIso8601String(),
       'created_at': createdAt.toIso8601String(),
     };
-  }
-
-  factory CreditCardTransaction.fromJson(Map<String, dynamic> json) {
-    return CreditCardTransaction(
-      id: json['id'] as String,
-      ownerId: json['owner_id'] as String,
-      cardId: json['card_id'] as String,
-      expenseId: json['expense_id'] as String?,
-      flow: json['flow'] as String,
-      amount: (json['amount'] as num).toDouble(),
-      description: json['description'] as String?,
-      installmentTotal: json['installment_total'] as int?,
-      installmentNo: json['installment_no'] as int?,
-      isPosted: json['is_posted'] as bool,
-      dueDate: DateTime.parse(json['due_date'] as String),
-      postedAt: json['posted_at'] != null
-          ? DateTime.parse(json['posted_at'] as String)
-          : null,
-      createdAt: DateTime.parse(json['created_at'] as String),
-    );
   }
 
   @override

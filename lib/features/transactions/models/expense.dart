@@ -25,6 +25,33 @@ class Expense {
     this.updatedAt,
   });
 
+  factory Expense.fromJson(Map<String, dynamic> json) {
+    return Expense(
+      id: json['id'] as String,
+      walletId: json['wallet_id'] as String,
+      type: json['type'] as String,
+      category: json['category'] as String,
+      subcategory: json['subcategory'] as String?,
+      amount: (json['amount'] as num).toDouble(),
+      currency: json['currency'] as String? ?? 'USD',
+      occurredAt: DateTime.parse(json['occurred_at'] as String),
+      description: json['description'] as String?,
+      isUpcoming: json['is_upcoming'] as bool? ?? false,
+      paymentType: _parsePaymentType(json['payment_type'] as String?),
+      creditCardFlow: _parseCreditCardFlow(json['credit_card_flow'] as String?),
+      creditCardId: json['credit_card_id'] as String?,
+      cardPaymentMode:
+          _parseCardPaymentMode(json['card_payment_mode'] as String?),
+      installmentCount: json['installment_count'] as int?,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'] as String)
+          : null,
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'] as String)
+          : null,
+    );
+  }
+
   final String id;
   final String walletId;
   final String type; // 'income' | 'expense' | 'transfer'
@@ -106,33 +133,6 @@ class Expense {
       'created_at': createdAt?.toIso8601String(),
       'updated_at': updatedAt?.toIso8601String(),
     };
-  }
-
-  factory Expense.fromJson(Map<String, dynamic> json) {
-    return Expense(
-      id: json['id'] as String,
-      walletId: json['wallet_id'] as String,
-      type: json['type'] as String,
-      category: json['category'] as String,
-      subcategory: json['subcategory'] as String?,
-      amount: (json['amount'] as num).toDouble(),
-      currency: json['currency'] as String? ?? 'USD',
-      occurredAt: DateTime.parse(json['occurred_at'] as String),
-      description: json['description'] as String?,
-      isUpcoming: json['is_upcoming'] as bool? ?? false,
-      paymentType: _parsePaymentType(json['payment_type'] as String?),
-      creditCardFlow: _parseCreditCardFlow(json['credit_card_flow'] as String?),
-      creditCardId: json['credit_card_id'] as String?,
-      cardPaymentMode:
-          _parseCardPaymentMode(json['card_payment_mode'] as String?),
-      installmentCount: json['installment_count'] as int?,
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'] as String)
-          : null,
-      updatedAt: json['updated_at'] != null
-          ? DateTime.parse(json['updated_at'] as String)
-          : null,
-    );
   }
 
   static PaymentType _parsePaymentType(String? value) {

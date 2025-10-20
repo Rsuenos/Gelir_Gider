@@ -21,7 +21,7 @@ void main() {
       // Assert
       expect(installments.length, 12);
       // İlk 11 taksit 83.33, son taksit 83.37 olmalı (kuruş farkı)
-      for (int i = 0; i < 11; i++) {
+      for (var i = 0; i < 11; i++) {
         expect(installments[i].amount, 83.33);
       }
       expect(installments[11].amount, 83.37);
@@ -39,7 +39,7 @@ void main() {
 
       // Toplam kontrolü
       final total =
-          installments.fold<double>(0.0, (sum, slice) => sum + slice.amount);
+          installments.fold<double>(0, (sum, slice) => sum + slice.amount);
       expect(total, 100.0);
     });
 
@@ -90,7 +90,7 @@ void main() {
 
     test('InstallmentSlice model test', () {
       // Arrange
-      final slice = InstallmentSlice(
+      const slice = InstallmentSlice(
         index: 2,
         amount: 150.5,
       );
@@ -108,7 +108,7 @@ void main() {
     test('edge case - negatif taksit sayısı', () {
       // Act & Assert
       expect(
-          () => InstallmentUtils.splitAmount(100.0, -1), throwsArgumentError);
+          () => InstallmentUtils.splitAmount(100.0, -1), throwsArgumentError,);
     });
 
     test('edge case - 0 tutar', () {

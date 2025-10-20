@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gelir_gider/core/theme/app_theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /// Available theme variants.
@@ -39,22 +40,32 @@ final NotifierProvider<ThemeController, ThemeState> themeProvider =
 class ThemeController extends Notifier<ThemeState> {
   @override
   ThemeState build() {
-    const initialType = AppThemeType.oneUI;
+    const initialType = AppThemeType.material;
     return ThemeState(
       mode: ThemeMode.system,
       type: initialType,
-      lightTheme: _buildTheme(initialType, Brightness.light),
-      darkTheme: _buildTheme(initialType, Brightness.dark),
+      lightTheme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
     );
   }
 
   void setMode(ThemeMode mode) => state = state.copyWith(mode: mode);
 
-  void setType(AppThemeType type) => state = state.copyWith(
+  void setType(AppThemeType type) {
+    if (type == AppThemeType.material) {
+      state = state.copyWith(
+        type: type,
+        lightTheme: AppTheme.light(),
+        darkTheme: AppTheme.dark(),
+      );
+    } else {
+      state = state.copyWith(
         type: type,
         lightTheme: _buildTheme(type, Brightness.light),
         darkTheme: _buildTheme(type, Brightness.dark),
       );
+    }
+  }
 }
 
 TextTheme _fonted(TextTheme base) {
