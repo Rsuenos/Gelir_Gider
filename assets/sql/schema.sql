@@ -78,4 +78,35 @@ create table if not exists debts (
   updated_at timestamp with time zone default now()
 );
 
+-- Kart hareketleri ve taksit planı
+create table if not exists credit_card_transactions (
+  id uuid primary key default gen_random_uuid(),
+  owner_id uuid not null references auth.users(id) on delete cascade,
+  card_id uuid not null references credit_cards(id) on delete cascade,
+  expense_id uuid null,                         -- Gider ile ilişki (varsa)
+  flow text not null check (flow in ('spend','payment')),
+  amount numeric(14,2) not null check (amount >= 0),
+  description text,
+  -- Taksit alanları:
+  installment_total int null check (installment_total between 2 and 12),
+  installment_no int null,                      -- 1..N
+  -- Tahakkuk/işleme zamanı:
+  is_posted boolean not null default false,     -- ilgili ay geldiyse işlenmiş mi
+  due_date date not null,                       -- taksit/işlem tarihi
+  posted_at timestamptz null,                   -- işlenme anı
+  created_at timestamptz not null default now()
+);
+
+-- İndeksler
+create index if not exists idx_cct_card_due on credit_card_transactions(card_id, due_date);
+create index if not exists idx_cct_posted on credit_card_transactions(is_posted, due_date);
+create index if not exists idx_cct_owner on credit_card_transactions(owner_id);
+
+-- Gelecek işlemler view'ı
+create or replace view credit_card_upcoming as
+select *
+from credit_card_transactions
+where is_posted = false and due_date > current_date
+order by due_date asc;
+
 -- Optional: budgets, notifications, forecast_cache tables can be added similarly.
