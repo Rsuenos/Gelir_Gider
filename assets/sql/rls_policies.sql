@@ -3,6 +3,7 @@ alter table wallets enable row level security;
 alter table shared_access enable row level security;
 alter table transactions enable row level security;
 alter table credit_cards enable row level security;
+alter table credit_card_transactions enable row level security;
 alter table debts enable row level security;
 
 -- Policies: Owner or shared can read/write according to permissions.
@@ -89,4 +90,10 @@ for all using (owner_id = auth.uid()) with check (owner_id = auth.uid());
 create policy "debts_owner_select" on debts
 for select using (owner_id = auth.uid());
 create policy "debts_owner_cud" on debts
+for all using (owner_id = auth.uid()) with check (owner_id = auth.uid());
+
+-- Credit card transactions: owner only
+create policy "cct_owner_select" on credit_card_transactions
+for select using (owner_id = auth.uid());
+create policy "cct_owner_cud" on credit_card_transactions
 for all using (owner_id = auth.uid()) with check (owner_id = auth.uid());

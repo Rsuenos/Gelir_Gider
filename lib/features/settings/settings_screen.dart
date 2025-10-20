@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gelir_gider/core/services/supabase_service.dart';
 import 'package:gelir_gider/core/theme/theme_provider.dart';
+import 'package:gelir_gider/core/widgets/app_drawer.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -15,6 +16,7 @@ class SettingsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(t('settings.title'))),
+      drawer: const AppDrawer(),
       body: ListView(
         children: [
           ListTile(
